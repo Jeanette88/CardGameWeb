@@ -1,0 +1,97 @@
+﻿@page "/games"
+@page "/games/{id:int}"
+@using CardGameWeb.Client.Services.CardService
+@using CardGameWeb.Shared.Models
+@inject ICardService _cardServ
+@inject HttpClient _http
+@inject NavigationManager _Nav
+
+
+
+<h3>Game</h3>
+
+@*Cards remaining: @_cardServ.Cards.Count*@
+
+
+<div class="row">
+    <div class="col-3">
+     
+    </div>
+    <div class="col-3">
+        <BlackjackHand Cards="dealer.Cards" />
+    </div>
+    <div class="col-3">
+        <BlackjackScore State="state" Player="dealer" />
+    </div>
+</div>
+
+@if (_cardServ.Cards != null)
+{
+    @foreach (var card in _cardServ.Cards)
+    {
+
+        <div class="text-center">
+            <div class="box1">
+
+                <h3>@card.Name</h3>
+                <img src="@card.ImgName" class="ImagePhoto">
+
+                @if (battleDone)
+                {
+
+                    <button type="button" class="btn btn-primary" onfocus="location.reload()">X</button>
+                }
+                else
+                {
+                    <button type="button" @onclick="(() => InsertX(card.Id, card))" class="btn btn-outline-success">X</button>
+                }
+
+
+            </div>
+        </div>
+
+    }
+
+}
+
+
+<button type="button" @onclick="@(() => ChangeAllCards())" class="btn btn-outline-success">Change Card</button>
+
+
+
+
+
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    //private Card deck { get; set; }
+
+    private bool battleDone = false;
+
+    protected override async Task OnInitializedAsync()
+    {    
+        await _cardServ.GetRandomCards(5);
+    }
+
+    private async Task ChangeAllCards()
+    {
+        await _cardServ.GetRandomCards(5);
+
+    }
+
+    private async Task InsertX(int Id, Card card)
+    {
+
+        if (card.Id != Id)
+        {
+
+            //await _cardServ.GetRandomCards(1);
+            await _cardServ.GetOneRandomCard();
+        }
+
+        battleDone = true;
+    }
+}
+

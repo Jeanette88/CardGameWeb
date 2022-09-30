@@ -1,0 +1,45 @@
+﻿@page "/"
+@using CardGameWeb.Client.Pages
+@inject NavigationManager NavigationManager
+
+<PageTitle>Card Game!</PageTitle>
+
+<h1>Welcome to Card Game! </h1>
+
+
+<h6>The card game is about getting five cards in your hand. Then you should be able to exchange any cards you want in your hand until you are satisfied. </h6>
+<h6>You can change cards as many times as you want.</h6>
+
+<h6> Do you want to Play?  click on the link "Play Card Game" Which you can find to the left of you on the homepage of the menubelow.</h6>
+
+<hr />
+
+Spades ♠
+Hearts ♡
+Clubs ♣
+Diamonds ♢
+
+<hr>
+
+Or you can click on the button here. <button class="btn btn-outline-success" @onclick="playGame"> Play Card Game </button>
+
+
+<hr>
+
+<img src="/Content/FirstCard.png" width="400px" />
+<img src="/Content/CardPic3.png" width="400px" />
+
+
+<h2></h2>
+
+
+@code {
+
+    void playGame()
+    {
+        NavigationManager.NavigateTo("/games");
+    }
+
+
+
+}

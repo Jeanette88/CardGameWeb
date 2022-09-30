@@ -1,0 +1,15 @@
+﻿@page "/change"
+@page "/change/{id:int}"
+
+<h3>Change</h3>
+
+@code {
+
+    [Parameter]
+    public int? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+       
+    }
+}

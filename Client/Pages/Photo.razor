@@ -1,0 +1,28 @@
+﻿@page "/photo"
+@using CardGameWeb.Client.Services.CardService
+@using CardGameWeb.Shared.Models
+@inject ICardService CardService
+
+<h3>Photo</h3>
+
+
+@foreach (var hamster in CardService.Cards)
+{
+
+    <div class="text-center">
+        <div class="box1">
+
+            <img src="@hamster.ImgName" class="ImagePhoto">
+
+        </div>
+    </div>
+}
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CardService.GetCards();
+    }
+}

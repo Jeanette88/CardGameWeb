@@ -1,0 +1,38 @@
+﻿@page "/history"
+@inject ICardService _cardServ
+@inject NavigationManager _Nav
+
+<h3>History</h3>
+
+<table class="table">
+
+    <hr />
+
+
+    @foreach (var game in _cardServ.JoinModels)
+    {
+        <div class="text-center">
+            <div class="box1">
+
+                <img src="@game.ImgName" class="ImagePhoto">
+               <th scope="row">@game.Games</th>
+            
+               <th scope="colgroup">@game.Name</th>
+
+            </div>
+        </div>
+
+
+    }
+
+
+</table>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await _cardServ.History();
+    }
+}
